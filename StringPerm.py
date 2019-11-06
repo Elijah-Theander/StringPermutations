@@ -21,15 +21,33 @@ def permutation(letters,start,end,stringlist):
             letters[start],letters[i] = letters[i],letters[start]
             permutation(letters,start+1,end,stringlist)
             letters[start],letters[i] = letters[i],letters[start]
+            
+#Function to take a list of string permutations,truncate it for all permutations of length 2-n
+#and then add those permutations into a set to remove all duplicates.
+#takes starting length, overall length of string,the list of strings, and the set of strings
+def createSet(startlength,length,stringlist,permset):
+    if(startlength==length):
+        for i in stringlist:
+            permset.add(i)
+        return
+    else:
+        for i in stringlist:
+            permset.add(i[0:startlength])
+        createSet(startlength+1,length,stringlist,permset)
+        
 
 
 #driver program to test above function
 
-thestring = "EICSP"
+thestring = "SPICE"
 n = len(thestring)
 a = list(thestring)
-perms = {thestring}
+perms = {thestring,}
+
 stringList = [thestring]
 permutation(a,0,n-1,stringList)
 print(stringList)
+createSet(2,n,stringList,perms)
+print(perms)
+
 
