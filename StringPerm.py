@@ -12,14 +12,14 @@ def toString(List):
     return ''.join(List)
 
 #Function to print Permutations of strings
-#Takes string, starting index of string, ending index of string
-def permutation(letters,start,end):
+#Takes string, starting index of string, ending index of string, and a list of all the strings
+def permutation(letters,start,end,stringlist):
     if start==end:
-        print(toString(letters))
+        stringlist.append(toString(letters))
     else:
         for i in range(start,end+1):
             letters[start],letters[i] = letters[i],letters[start]
-            permutation(letters,start+1,end)
+            permutation(letters,start+1,end,stringlist)
             letters[start],letters[i] = letters[i],letters[start]
 
 
@@ -28,4 +28,8 @@ def permutation(letters,start,end):
 thestring = "EICSP"
 n = len(thestring)
 a = list(thestring)
-permutation(a,0,n-1)
+perms = {thestring}
+stringList = [thestring]
+permutation(a,0,n-1,stringList)
+print(stringList)
+
