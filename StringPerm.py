@@ -34,6 +34,12 @@ def createSet(startlength,length,stringlist,permset):
         for i in stringlist:
             permset.add(i[0:startlength])
         createSet(startlength+1,length,stringlist,permset)
+
+#Function to turn the Set of permutations, load it into a set, and sort that set.
+def setToList(permset):
+    stringlist = list(permset)
+    stringlist.sort()
+    return stringlist
         
 
 
@@ -46,8 +52,8 @@ perms = {thestring,}
 
 stringList = [thestring]
 permutation(a,0,n-1,stringList)
-print(stringList)
 createSet(2,n,stringList,perms)
-print(perms)
+stringList = setToList(perms)
+print(stringList)
 
 
