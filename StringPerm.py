@@ -7,6 +7,9 @@ caught me as a good computer science problem to try and solve for myself.
 Elijah Theander
 11/06/19
 """
+import sys
+import keyboard
+
 
 def toString(List):
     return ''.join(List)
@@ -62,28 +65,48 @@ def sortList(listList,length,startlength,stringlist):
             if(len(i) == startlength):
                 listList[startlength-2].append(i)
         sortList(listList,length,startlength+1,stringlist)
-            
 
+#Function that ties all of the above functions together, and returns the list of lists
+def stringPerm(theString):
+    length = len(theString)
+    letters = list(theString)
+    perms=set()
+    stringList = [theString]
+
+    permutation(letters,0,length-1,stringList)
+    createSet(2,length,stringList,perms)
+    stringList = setToList(perms)
+
+    nestedList = listList(length)
+    sortList(nestedList,length,2,stringList)
+    
+    
+    return nestedList
+ 
 
 
 #driver program to test above function
 
-thestring = "SPICE"
-n = len(thestring)
-a = list(thestring)
-perms = {thestring,}
+print("Press Enter to input your letters,or press Esc to exit:")
 
-stringList = [thestring]
-permutation(a,0,n-1,stringList)
-createSet(2,n,stringList,perms)
-stringList = setToList(perms)
-print(stringList)
-print(n)
+while True:
+    try:
+        if keyboard.is_pressed('ENTER'):
+            print("Enter your letters without spaces:")
+            string_input = input()
+            n = len(string_input)
+            perm_list = stringPerm(string_input)
+            for x in range(0,n-1):
+                print("Letter Permutations with "),print(x+2),print("letters:")
+                print(perm_list[x]),print('\n')
+            print("Press Enter again to try a new set of letters, or Esc to close")
 
-newlist = listList(n)
-print(newlist)
-
-sortList(newlist,n,2,stringList)
-print(newlist)
-
+        if keyboard.is_pressed('Esc'):
+            print("Exiting...")
+            sys.exit(0)
+    except:
+        break
+       
+            
+            
 
