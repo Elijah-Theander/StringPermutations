@@ -35,12 +35,35 @@ def createSet(startlength,length,stringlist,permset):
             permset.add(i[0:startlength])
         createSet(startlength+1,length,stringlist,permset)
 
-#Function to turn the Set of permutations, load it into a set, and sort that set.
+#Function to turn the Set of permutations, load it into a list, and sort alphabetically
 def setToList(permset):
     stringlist = list(permset)
     stringlist.sort()
     return stringlist
-        
+
+#function to generate list of lists.
+def listList(length):
+    returnlist = []
+    for x in range(0,length-1):
+        returnlist.append([])
+    
+    return returnlist 
+    
+
+#Function to sort the list by length.
+def sortList(listList,length,startlength,stringlist):
+    if (startlength==length):
+        for i in stringlist:
+            if(len(i) == length):
+                listList[length-2].append(i)
+        return
+    else:
+        for i in stringlist:
+            if(len(i) == startlength):
+                listList[startlength-2].append(i)
+        sortList(listList,length,startlength+1,stringlist)
+            
+
 
 
 #driver program to test above function
@@ -55,5 +78,12 @@ permutation(a,0,n-1,stringList)
 createSet(2,n,stringList,perms)
 stringList = setToList(perms)
 print(stringList)
+print(n)
+
+newlist = listList(n)
+print(newlist)
+
+sortList(newlist,n,2,stringList)
+print(newlist)
 
 
